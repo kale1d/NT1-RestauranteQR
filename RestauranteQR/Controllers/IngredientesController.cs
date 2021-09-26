@@ -54,7 +54,7 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Cantidad")] Ingrediente ingrediente)
+        public async Task<IActionResult> Create(Ingrediente ingrediente)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Cantidad")] Ingrediente ingrediente)
+        public async Task<IActionResult> Edit(int id, Ingrediente ingrediente)
         {
             if (id != ingrediente.Id)
             {
