@@ -9,7 +9,10 @@ namespace RestauranteQR.BaseDatos
 {
     public class RestoDbContext : DbContext
     {
+        public RestoDbContext(DbContextOptions opciones) : base(opciones)
+        {
 
+        }
         public DbSet<Ingrediente> Ingredientes { get; set; }
     }
 }
