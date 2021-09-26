@@ -26,7 +26,7 @@ namespace RestauranteQR
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C: \Users\matih\OneDrive\Escritorio\ORT\PROGRAMACION EN NUEVAS TECNOLOGIAS 1\NT1 - RestauranteQR\RestauranteQR\BaseDatos"));
+            services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\matih\OneDrive\Escritorio\ORT\PROGRAMACION EN NUEVAS TECNOLOGIAS 1\NT1-RestauranteQR\RestauranteQR\BaseDatos"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
