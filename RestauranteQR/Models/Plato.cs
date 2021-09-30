@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,17 +10,16 @@ namespace RestauranteQR.Models
     
     public class Plato
     {
-        private string nombre;
-        private List<Ingrediente> ingredientesDelPlato;
-        public Plato(string nombre)
+        [Key]
+        public int Id { get; set; }
+
+        public String Nombre { get; set; }
+
+        public Plato()
         {
-            ingredientesDelPlato = new List<Ingrediente>();
         }
 
-        private void setNombre(string nombre)
-        {
-            this.nombre = nombre;
-        }
+
         
     }
 }

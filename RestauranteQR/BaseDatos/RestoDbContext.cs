@@ -14,5 +14,12 @@ namespace RestauranteQR.BaseDatos
 
         }
         public DbSet<Ingrediente> Ingredientes { get; set; }
+        public DbSet<Plato> Platos { get; set; }
+
+        public DbSet<Mesa> Mesa { get; set; }
+        public DbSet<IngredientePorPlato> IngredientePorPlatos { get; set; }
+
+        public DbSet<Pedido> Pedido { get; set; }
+
     }
 }

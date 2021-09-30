@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestauranteQR.Models
 {
-    [Table("INGREDIENTES")]
+   // [Table("INGREDIENTES")]
     public class Ingrediente
     {
         [Key]
