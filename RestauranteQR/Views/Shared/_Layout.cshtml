@@ -9,12 +9,12 @@
 </head>
 <body>
     <header>
-        <div class="row" style="background-color: red">
+        <div class="row fondo" >
             <div class="col-3">
-                <h4>Aca va el logo de nuestro resto!</h4>
+                <img src="../Imagenes/logo.jpg" alt="logo" />
             </div>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 col-9">
-                <div class="container">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3 col-9 fondo">
+                <div class="container fondo">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RestauranteQR</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,13 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ingredientes" asp-action="Create">Agregar Ingrediente</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Carta</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Ingredientes" asp-action="Index">Ingredientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Platos" asp-action="Index">Platos</a>
                             </li>
                         </ul>
                     </div>
@@ -38,19 +44,44 @@
         </div>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 principal">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted fondo">
         <div class="container">
-            &copy; 2021 - RestauranteQR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+            <div class="row">
+                <div class="col-4">
+                    <h6> &copy; 2021 - RestauranteQR - </h6><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-4">
+
+                </div>
+                <div class="col-4">
+                    <h6>Seguinos!</h6>
+                    <div class="col-6">Logo insta</div>
+                    <div class="col-6">Logo face</div>
+                </div>
+            </div>
+
+            </div>
+            
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    <style>
+        .principal{
+            height: 1000px;
+            background-image: url(/Imagenes/fondo.jpg);
+        }
+
+        .fondo{
+            background-color: burlywood;
+        }
+
+    </style>
 </body>
 </html>

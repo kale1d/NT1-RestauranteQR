@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestauranteQR.Models
 {
-    
+
     public class Plato
     {
         [Key]
