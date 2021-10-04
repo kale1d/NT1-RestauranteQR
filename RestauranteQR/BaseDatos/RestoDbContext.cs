@@ -21,5 +21,7 @@ namespace RestauranteQR.BaseDatos
 
         public DbSet<Pedido> Pedido { get; set; }
 
+        public DbSet<RestauranteQR.Models.Usuario> Usuario { get; set; }
+
     }
 }
