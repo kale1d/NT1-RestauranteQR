@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using RestauranteQR.Models;
 
 namespace RestauranteQR.Controllers
 {
+    [Authorize(Roles = nameof(Rol.Administrador))]
     public class UsuariosController : Controller
     {
         private readonly RestoDbContext _context;
@@ -22,7 +24,7 @@ namespace RestauranteQR.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            return View(await _context.Administradores.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -33,7 +35,7 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario
+            var usuario = await _context.Administradores
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -73,7 +75,7 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario.FindAsync(id);
+            var usuario = await _context.Administradores.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -124,7 +126,7 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuario
+            var usuario = await _context.Administradores
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -139,15 +141,15 @@ namespace RestauranteQR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            _context.Usuario.Remove(usuario);
+            var usuario = await _context.Administradores.FindAsync(id);
+            _context.Administradores.Remove(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Administradores.Any(e => e.Id == id);
         }
     }
 }

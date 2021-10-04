@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestauranteQR.Models
 {
-    public class Usuario
+    public abstract class Usuario
     {
         [Key]
         public int Id { get; set; }
@@ -18,6 +18,7 @@ namespace RestauranteQR.Models
         public String Email { get; set; }
 
         public String Password { get; set; }
+        public abstract Rol Rol { get; }
 
         public Usuario()
         {

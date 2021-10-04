@@ -17,11 +17,11 @@ namespace RestauranteQR.BaseDatos
         public DbSet<Plato> Platos { get; set; }
 
         public DbSet<Mesa> Mesa { get; set; }
-        public DbSet<IngredientePorPlato> IngredientePorPlatos { get; set; }
+        public DbSet<IngredientePorPlato> IngredientesPorPlatos { get; set; }
 
-        public DbSet<Pedido> Pedido { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
 
-        public DbSet<RestauranteQR.Models.Usuario> Usuario { get; set; }
-
+        public DbSet<Administrador> Administradores { get; set; }
+       
     }
 }
