@@ -11,7 +11,7 @@ using RestauranteQR.Models;
 
 namespace RestauranteQR.Controllers
 {
-    [Authorize(Roles = nameof(Rol.Administrador))]
+    [Authorize(Roles = "Administrador")]
     public class IngredientesController : Controller
     {
         private readonly RestoDbContext _context;

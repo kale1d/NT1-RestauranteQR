@@ -30,11 +30,11 @@ namespace RestauranteQR.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login(string ReturnUrl)
         {
             // Guardamos la url de retorno para que una vez concluído el login del 
             // usuario lo podamos redirigir a la página en la que se encontraba antes
-            TempData[_Return_Url] = returnUrl;
+            TempData[_Return_Url] = ReturnUrl;
             return View();
         }
 
@@ -45,7 +45,7 @@ namespace RestauranteQR.Controllers
 
             if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password))
             {
-                Usuario usuario = null;
+                Administrador usuario = null;
 
                 if (rol == Rol.Administrador)
                 {
@@ -62,7 +62,7 @@ namespace RestauranteQR.Controllers
                     identity.AddClaim(new Claim(ClaimTypes.Name, usuario.Nombre));
 
                     // Se utilizará para la autorización por roles
-                    identity.AddClaim(new Claim(ClaimTypes.Role, usuario.Rol.ToString()));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
 
                     // Lo utilizaremos para acceder al Id del usuario que se encuentra en el sistema.
                     identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
