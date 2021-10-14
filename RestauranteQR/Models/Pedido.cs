@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +16,7 @@ namespace RestauranteQR.Models
         [ForeignKey("MesaId")]
         public virtual Mesa Mesa { get; set; }
 
-
+        public List<Plato> Platos { get; set; }
 
         public Pedido()
         {

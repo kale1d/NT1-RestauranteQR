@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<RestauranteQR.Models.Plato>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Carta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Carta</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <h2>HACE TU PEDIDO TOCANDO LOS BOTONES</h2>
 </p>
 <table class="table">
     <thead>
@@ -23,20 +23,19 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-            @Html.DisplayFor(modelItem => item. Precio)
+                @Html.DisplayFor(modelItem => item.Precio)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+            <td><button asp-controller="@item" asp-action="AgregarPedido">+</button></td>
+            <td><button asp-controller="@item" asp-action="RemoverPedido">-</button></td>
+
+</tr>
+        }
     </tbody>
 </table>
