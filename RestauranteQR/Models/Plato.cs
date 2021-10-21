@@ -21,7 +21,9 @@ namespace RestauranteQR.Models
         {
         }
 
-
-        
+        internal static ReadOnlySpan<char> FindFirstValue(string nameIdentifier)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

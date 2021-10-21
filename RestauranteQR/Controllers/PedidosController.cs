@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -50,7 +52,17 @@ namespace RestauranteQR.Controllers
         public IActionResult Create()
         {
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id");
-            return View(_context.Platos.ToList());
+            ViewModel.VMPedido modelo = new ViewModel.VMPedido();
+            modelo.ListaVMPeidoItem = new List<ViewModel.VMPedidoItem>();
+            foreach (var item in _context.Platos.ToList())
+            {
+                modelo.ListaVMPeidoItem.Add(new ViewModel.VMPedidoItem()
+                {
+                    IdPlato = item.Id,
+                    NombrePlato = item.Nombre
+                });
+            }
+            return View(modelo);
         }
 
         //public IActionResult AgregarPlato()
