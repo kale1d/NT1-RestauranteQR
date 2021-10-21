@@ -53,10 +53,10 @@ namespace RestauranteQR.Controllers
         {
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id");
             ViewModel.VMPedido modelo = new ViewModel.VMPedido();
-            modelo.ListaVMPeidoItem = new List<ViewModel.VMPedidoItem>();
+            modelo.ListaVMPedidoItem = new List<ViewModel.VMPedidoItem>();
             foreach (var item in _context.Platos.ToList())
             {
-                modelo.ListaVMPeidoItem.Add(new ViewModel.VMPedidoItem()
+                modelo.ListaVMPedidoItem.Add(new ViewModel.VMPedidoItem()
                 {
                     IdPlato = item.Id,
                     NombrePlato = item.Nombre
