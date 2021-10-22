@@ -10,8 +10,8 @@
 <body>
     <header>
         <div class="row fondo" >
-            <div class="col-3">
-                <img src="~/Imagenes/logo.jpg" alt="logo" />
+            <div class="col-3 espacioLogo">
+                <img id="imgLogo" src="~/Imagenes/logo.jpg" alt="logo" />
             </div>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3 col-9 fondo">
                 <div class="container fondo">
@@ -65,9 +65,11 @@
 
                 </div>
                 <div class="col-4">
-                    <h6>Seguinos!</h6>
-                    <div class="col-6">Logo insta</div>
-                    <div class="col-6">Logo face</div>
+                    <h6 style="text-align: center; color: black;">Seguinos!</h6>
+                    <div class="row">
+                        <div class="col-6 redes"><a href="https://www.instagram.com/?hl=es" target="_blank"><img src="/Imagenes/instagram.png" alt="insta"</a></div>
+                        <div class="col-6 redes"><a href="https://es-la.facebook.com/" target="_blank"><img src="/Imagenes/facebook.png" alt="face"</a></div>
+                    </div>
                 </div>
             </div>
 
@@ -84,9 +86,30 @@
             background-image: url(/Imagenes/fondo.jpg);
         }
 
+        
+
         .fondo{
             background-color: burlywood;
         }
+
+        #imgLogo{
+            width: 30%;
+            margin-left: 30%;
+        }
+
+        .espacioLogo{
+            background-color: white;
+        }
+
+        .redes img{
+            width: 30%;
+        }
+        
+        .redes{
+            text-align: center;
+        }
+
+
 
     </style>
 </body>
