@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\Privacy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Imagenes\fondo.jpg" />
     <None Include="wwwroot\Imagenes\logo.jpg" />
   </ItemGroup>

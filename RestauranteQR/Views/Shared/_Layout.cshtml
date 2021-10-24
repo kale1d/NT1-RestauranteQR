@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body id="body">
     <header>
         <div class="row fondo" >
-            <div class="col-3 espacioLogo">
-                <img id="imgLogo" src="~/Imagenes/logo.jpg" alt="logo" />
-            </div>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3 col-9 fondo">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light col-9 fondo">
                 <div class="container fondo">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RestauranteQR</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img id="imgLogo" src="~/Imagenes/logo2.png" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -26,10 +23,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-controller="Home" asp-action="Carta" class="nav-link text-dark">Carta</a>
+                                <a asp-controller="Home" asp-action="Carta" class="nav-link text-dark">Menu</a>
                             </li>
                             <li class="nav-item">
                                 <a asp-controller="Pedidos" asp-action="Create" class="nav-link text-dark">Pedido</a>
@@ -59,16 +53,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <h6> &copy; 2021 - RestauranteQR - </h6><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    <h6> &copy; RestauranteQR 2021 </h6>
                 </div>
                 <div class="col-4">
 
                 </div>
                 <div class="col-4">
-                    <h6 style="text-align: center; color: black;">Seguinos!</h6>
+                    <h6 style="text-align: center; color: black;">Nuestras redes</h6>
                     <div class="row">
-                        <div class="col-6 redes"><a href="https://www.instagram.com/?hl=es" target="_blank"><img src="/Imagenes/instagram.png" alt="insta"</a></div>
-                        <div class="col-6 redes"><a href="https://es-la.facebook.com/" target="_blank"><img src="/Imagenes/facebook.png" alt="face"</a></div>
+                        <div class="col-6 redes"><a href="https://www.instagram.com/?hl=es" target="_blank"><img src="/Imagenes/instagram2.png" alt="insta"</a></div>
+                        <div class="col-6 redes"><a href="https://es-la.facebook.com/" target="_blank"><img src="/Imagenes/facebook2.png" alt="face"</a></div>
                     </div>
                 </div>
             </div>
@@ -81,19 +75,22 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
     <style>
-        .principal{
-            height: 1000px;
-            background-image: url(/Imagenes/fondo.jpg);
+
+        #body {
+            background-image: url(/Imagenes/fondo2.png);
+        }
+        .principal {
+            height: 100vh;
         }
 
-        
-
-        .fondo{
-            background-color: burlywood;
-        }
-
-        #imgLogo{
-            width: 30%;
+        .fondo {
+            background-color: #B4C4C3;
+            padding: 0;
+            height: 100px;
+            }
+       
+        #imgLogo {
+            width: 25%;
             margin-left: 30%;
         }
 
@@ -102,15 +99,13 @@
         }
 
         .redes img{
-            width: 30%;
+            width: 50%;
         }
         
         .redes{
             text-align: center;
         }
 
-
-
-    </style>
+        </style>
 </body>
 </html>

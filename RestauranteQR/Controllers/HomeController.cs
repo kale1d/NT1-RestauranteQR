@@ -31,11 +31,6 @@ namespace RestauranteQR.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Carta()
         {
             return View(_context.Platos.ToList());
