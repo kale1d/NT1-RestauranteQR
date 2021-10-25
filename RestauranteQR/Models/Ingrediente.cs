@@ -17,5 +17,10 @@ namespace RestauranteQR.Models
 
         //[Display(Cantidad = "Qdad")]
         public int Cantidad { get; set; }
+
+        public static implicit operator Ingrediente(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
