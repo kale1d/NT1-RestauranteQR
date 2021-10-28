@@ -21,5 +21,7 @@ namespace RestauranteQR.Models
         [ForeignKey(nameof(Ingrediente))]
         public int IngredienteId { get; set; }
 
+ 
+
     }
 }

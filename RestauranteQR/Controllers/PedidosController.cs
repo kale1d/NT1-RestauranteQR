@@ -59,7 +59,8 @@ namespace RestauranteQR.Controllers
                 modelo.ListaVMPedidoItem.Add(new ViewModel.VMPedidoItem()
                 {
                     IdPlato = item.Id,
-                    NombrePlato = item.Nombre
+                    NombrePlato = item.Nombre,
+                    PrecioPlato = item.Precio
                 });
             }
             return View(modelo);

@@ -56,11 +56,11 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Precio")] Plato plato, Ingrediente ingrediente1, Ingrediente ingrediente2)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Precio,Ingrediente1,Ingredient2")] Plato plato)
         {
             if (ModelState.IsValid)
             {
-                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, ingrediente1.Nombre, ingrediente2.Nombre);
+                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.Ingrediente1, plato.Ingrediente2);
                 //_context.Add(plato);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -9,6 +9,8 @@ namespace RestauranteQR.ViewModel
     public class VMIngredientesPorPlato
     {
           public List<Ingrediente> Ingredientes { get; set; }
-        
+
+     
+
     }
 }

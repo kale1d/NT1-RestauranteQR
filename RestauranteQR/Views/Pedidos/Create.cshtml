@@ -1,5 +1,7 @@
 ﻿@model RestauranteQR.ViewModel.VMPedido
 
+
+
 @{
     ViewData["Title"] = "Carta";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,23 +26,27 @@
         @for (int i = 0; i < Model.ListaVMPedidoItem.Count; i++)
         {
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].NombrePlato)
-                </td>
-                <td>
-                    <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].IdPlato" />
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].NombrePlato)
+            </td>
+            <td>
+                <span>$</span>
+                @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].PrecioPlato)
+            </td>
+            <td>
+                <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].IdPlato" />
 
-                </td>
-                <td><button onclick="Agregar(@i)">+</button></td>
-                <td>
-                    @Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)
+            </td>
+            <td><button onclick="Agregar(@i)">+</button></td>
+            <td>
+                @Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)
 
-                </td>
+            </td>
 
-                <td><button onclick="Restar(@i)">-</button></td>
+            <td><button onclick="Restar(@i)">-</button></td>
 
-            </tr>
+        </tr>
         }
 
     </tbody>
@@ -71,7 +77,7 @@
             num--;
             elemento.value = num;
         }
-  
+
     }
 
     //function Dev() {

@@ -15,7 +15,7 @@ namespace RestauranteQR.ViewModel
         public string NombrePlato { get; set; }
         public int Cantidad { get; set; } = 0;
 
-        public int Precio { get; set; }
+        public int PrecioPlato { get; set; }
 
 
     }

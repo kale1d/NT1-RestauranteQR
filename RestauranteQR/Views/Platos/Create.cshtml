@@ -1,5 +1,6 @@
 ﻿@model RestauranteQR.Models.Plato
 
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,12 +29,12 @@
                 <select name="ingrediente">
                     <option value="">Seleccione el primer ingrediente</option>
                     for(int i = 0; i < Ingrediente.List(); i++){
-                    @*<option value="@Ingrediente.toList(i)">@Ingrediente.toList(i)</option>*@
+                    <option value="@Ingrediente.toList(i)">@Ingrediente.toList(i)</option>
                     }
 
                     @*<option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>*@
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>*@
                 </select>
                 <span asp-validation-for="Ingrediente1" class="text-danger"></span>
                 </br>
