@@ -17,9 +17,11 @@ namespace RestauranteQR.Models
 
         public int Precio { get; set; }
 
-        public Ingrediente Ingrediente1 { get; set; }
+        [Display(Name = "Ingrediente 1")]
+        public int? IngredienteId1 { get; set; }
 
-        public Ingrediente Ingrediente2 { get; set; }
+        [Display(Name = "Ingrediente 2")]
+        public int? IngredienteId2 { get; set; }
 
         public Plato()
         {

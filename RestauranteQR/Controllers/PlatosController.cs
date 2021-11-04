@@ -36,6 +36,7 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
+
             var plato = await _context.Platos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (plato == null)
@@ -43,6 +44,19 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
+            var ingredientes = _context.Ingredientes;
+
+
+            foreach (var ingrediente in ingredientes)
+            {
+                if (ingrediente.Id == plato.IngredienteId1)
+                {
+                    ViewData["Ingrediente1"] = ingrediente.Nombre;
+                }
+                if (ingrediente.Id == plato.IngredienteId2) {
+                    ViewData["Ingrediente2"] = ingrediente.Nombre;
+                }
+            }
             return View(plato);
         }
 
@@ -51,12 +65,13 @@ namespace RestauranteQR.Controllers
         {
             //ViewBag.Nombre="Mati";
 
-            VMIngredientesPorPlato nuevoIngPorPlato = new VMIngredientesPorPlato();
-            nuevoIngPorPlato.Ingredientes = _context.Ingredientes.ToList();
-            nuevoIngPorPlato.Plato = new Plato();
-            ViewData["Ingrediente1"] = new SelectList(_context.Ingredientes, "Id", "Nombre", nuevoIngPorPlato.Plato.Ingrediente1);
-            ViewData["Ingrediente2"] = new SelectList(_context.Ingredientes, "Id", "Nombre", nuevoIngPorPlato.Plato.Ingrediente2);
-            return View(nuevoIngPorPlato);
+            
+            Plato plato = new Plato();
+            var ingredientes = _context.Ingredientes;
+            ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
+            ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
+           
+            return View();
         }
 
         // POST: Platos/Create
@@ -64,11 +79,11 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Precio,Ingrediente1,Ingredient2")] Plato plato)
+        public async Task<IActionResult> Create(Plato plato)
         {
             if (ModelState.IsValid)
             {
-                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.Ingrediente1, plato.Ingrediente2);
+                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.IngredienteId1, plato.IngredienteId2);
                 //_context.Add(plato);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

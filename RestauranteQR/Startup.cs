@@ -28,7 +28,7 @@ namespace RestauranteQR
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(ConfiguracionCookie);
             services.AddControllersWithViews();
-            services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\matih\OneDrive\Escritorio\ORT\PROGRAMACION EN NUEVAS TECNOLOGIAS 1\NT1-RestauranteQR\RestauranteQR\BaseDatos\IngredienteTabla.db"));
+            services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"Data Source=/Users/fidustap/ORT/2Cuat/NT1/RestauranteQR/RestauranteQR/BaseDatos/IngredienteTabla.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
