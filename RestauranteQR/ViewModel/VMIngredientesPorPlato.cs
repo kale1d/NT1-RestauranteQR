@@ -10,7 +10,7 @@ namespace RestauranteQR.ViewModel
     {
           public List<Ingrediente> Ingredientes { get; set; }
 
-     
+          public Plato Plato { get; set; }
 
     }
 }

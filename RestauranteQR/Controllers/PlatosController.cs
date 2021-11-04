@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RestauranteQR.BaseDatos;
 using RestauranteQR.Models;
+using RestauranteQR.ViewModel;
 
 namespace RestauranteQR.Controllers
 {
@@ -46,9 +47,16 @@ namespace RestauranteQR.Controllers
         }
 
         // GET: Platos/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
-            return View();
+            //ViewBag.Nombre="Mati";
+
+            VMIngredientesPorPlato nuevoIngPorPlato = new VMIngredientesPorPlato();
+            nuevoIngPorPlato.Ingredientes = _context.Ingredientes.ToList();
+            nuevoIngPorPlato.Plato = new Plato();
+            ViewData["Ingrediente1"] = new SelectList(_context.Ingredientes, "Id", "Nombre", nuevoIngPorPlato.Plato.Ingrediente1);
+            ViewData["Ingrediente2"] = new SelectList(_context.Ingredientes, "Id", "Nombre", nuevoIngPorPlato.Plato.Ingrediente2);
+            return View(nuevoIngPorPlato);
         }
 
         // POST: Platos/Create
