@@ -1,88 +1,102 @@
-﻿@model RestauranteQR.ViewModel.VMPedido
+﻿    @model RestauranteQR.ViewModel.VMPedido
 
 
 
-@{
-    ViewData["Title"] = "Carta";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewData["Title"] = "Carta";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<p>
-    <h2>Mi pedido</h2>
-</p>
-<table class="table">
-    @*<thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Precio)
-                </th>
-                <th></th>
-            </tr>
-        </thead>*@
-    <tbody>
-        @for (int i = 0; i < Model.ListaVMPedidoItem.Count; i++)
-        {
+    <p>
+        <h2>Mi pedido</h2>
+    </p>
+        @*<thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>*@
+<form asp-action="Create">
+    @for (int i = 0; i < Model.ListaVMPedidoItem.Count; i++)
+    {
 
-        <tr>
-            <td>
+        <div class="row size align-content-center">
+            <div class="col-md">
                 @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].NombrePlato)
-            </td>
-            <td>
+            </div>
+            <div class="col-sm">
                 <span>$</span>
                 @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].PrecioPlato)
-            </td>
-            <td>
-                <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].IdPlato" />
+            </div>
+            <div class="row quantity">
+                <div>
+                    <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].IdPlato" />
 
-            </td>
-            <td><button onclick="Agregar(@i)">+</button></td>
-            <td>
-                @Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)
+                </div>
+                <div><button onclick="Agregar(@i)">+</button></div>
+                <div>
+                    @Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)
 
-            </td>
+                </div>
 
-            <td><button onclick="Restar(@i)">-</button></td>
-
-        </tr>
-        }
-
-    </tbody>
-</table>
-<button type="submit" onclick="Dev()">Confirmar pedido!</button>
-<script>
-
-    function Agregar(indiceTocado) {
-        //vamos a hacer que sume el innerHtml para que muestre la cantidad correcta en el textbox //, new {arroba type = "number" }
-        //var valor = document.getElementById('ListaVMPeidoItem_' + indiceTocado + '__Cantidad');
-        //alert(valor.value);
-
-        var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
-        var num = parseInt(elemento.value);
-        num++;
-        elemento.value = num;
-
+                <div><button onclick="Restar(@i)">-</button></div>
+            </div>
+            <div class="line"> </div>
+        </div>
+        
     }
 
-    function Restar(indiceTocado) {
-        //vamos a hacer que reste el innerHtml para que muestre la cantidad correcta en el textbox
-        //var valor = document.getElementById('ListaVMPeidoItem_' + indiceTocado + '__Cantidad');
-        //alert(valor.value);
+    <input type="submit" value="Confirmar Pedido!" class="btn btn-primary" />
+</form>
+    <script>
 
-        var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
-        var num = parseInt(elemento.value);
-        if (num > 0) {
-            num--;
+        function Agregar(indiceTocado) {
+            //vamos a hacer que sume el innerHtml para que muestre la cantidad correcta en el textbox //, new {arroba type = "number" }
+            //var valor = document.getElementById('ListaVMPeidoItem_' + indiceTocado + '__Cantidad');
+            //alert(valor.value);
+
+            var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
+            var num = parseInt(elemento.value);
+            num++;
             elemento.value = num;
+
         }
 
+        function Restar(indiceTocado) {
+            //vamos a hacer que reste el innerHtml para que muestre la cantidad correcta en el textbox
+            //var valor = document.getElementById('ListaVMPeidoItem_' + indiceTocado + '__Cantidad');
+            //alert(valor.value);
+
+            var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
+            var num = parseInt(elemento.value);
+            if (num > 0) {
+                num--;
+                elemento.value = num;
+            }
+
+        }
+
+        //function Dev() {
+        //   ListaVMPedidoItem misPedidos = new ListaVMPedidoItem();
+        //    return misPedidos;
+       // }
+
+    </script>
+
+<style>
+    .quantity {
     }
-
-    //function Dev() {
-    //   ListaVMPedidoItem misPedidos = new ListaVMPedidoItem();
-    //    return misPedidos;
-   // }
-
-</script>
+    .line {
+        width: 100%;
+        border-bottom: 1px solid lightgrey;
+    }
+    .size {
+        height: 40px;
+        margin: 0 8px;
+    }
+</style>

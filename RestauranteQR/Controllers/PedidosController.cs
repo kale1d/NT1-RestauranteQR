@@ -81,7 +81,7 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MesaId")] Pedido pedido)
+        public async Task<IActionResult> Create(Pedido pedido)
         {
             if (ModelState.IsValid)
             {
@@ -126,8 +126,9 @@ namespace RestauranteQR.Controllers
             {
                 try
                 {
-                    _context.Update(pedido);
+                    RNPedido.AgregarPedido(_context, pedido);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
