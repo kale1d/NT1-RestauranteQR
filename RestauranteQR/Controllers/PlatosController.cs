@@ -51,12 +51,9 @@ namespace RestauranteQR.Controllers
         {
             //ViewBag.Nombre="Mati";
 
-            VMIngredientesPorPlato nuevoIngPorPlato = new VMIngredientesPorPlato();
-            nuevoIngPorPlato.Ingredientes = _context.Ingredientes.ToList();
-            nuevoIngPorPlato.Plato = new Plato();
-            ViewData["Ingrediente1"] = new SelectList(_context.Ingredientes, "Id", "Nombre", nuevoIngPorPlato.Plato.Ingrediente1);
-            ViewData["Ingrediente2"] = new SelectList(_context.Ingredientes, "Id", "Nombre", nuevoIngPorPlato.Plato.Ingrediente2);
-            return View(nuevoIngPorPlato);
+            ViewData["Ingrediente1"] = new SelectList(_context.Ingredientes, "Id", "Nombre");
+            ViewData["Ingrediente2"] = new SelectList(_context.Ingredientes, "Id", "Nombre");
+            return View(new Plato());
         }
 
         // POST: Platos/Create
@@ -64,11 +61,11 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Precio,Ingrediente1,Ingredient2")] Plato plato)
+        public async Task<IActionResult> Create( Plato plato)
         {
             if (ModelState.IsValid)
             {
-                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.Ingrediente1, plato.Ingrediente2);
+                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.Ingrediente1Id, plato.Ingrediente2Id);
                 //_context.Add(plato);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

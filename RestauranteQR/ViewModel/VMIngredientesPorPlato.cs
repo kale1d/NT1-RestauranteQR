@@ -12,5 +12,7 @@ namespace RestauranteQR.ViewModel
 
           public Plato Plato { get; set; }
 
+        public int? Ingrediente1Id { get; set; }
+
     }
 }

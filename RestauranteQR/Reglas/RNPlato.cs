@@ -9,15 +9,15 @@ namespace RestauranteQR.Models
     public class RNPlato
     {
 
-        public static void AgregarPlato(RestoDbContext dbContext, int id, string nombre, int precio, Ingrediente ingrediente1, Ingrediente ingrediente2)
+        public static void AgregarPlato(RestoDbContext dbContext, int id, string nombre, int precio, int ingrediente1, int ingrediente2)
         {
             dbContext.Database.BeginTransaction();
             Plato nuevoPlato = new Plato();
             nuevoPlato.Id = id;
             nuevoPlato.Nombre = nombre;
             nuevoPlato.Precio = precio;
-            nuevoPlato.Ingrediente1 = ingrediente1;
-            nuevoPlato.Ingrediente2 = ingrediente2;
+            nuevoPlato.Ingrediente1Id = ingrediente1;
+            nuevoPlato.Ingrediente2Id = ingrediente2;
 
             dbContext.Platos.Add(nuevoPlato);
 
@@ -27,8 +27,8 @@ namespace RestauranteQR.Models
             ingrePorPlato1.PlatoId = nuevoPlato.Id;
             ingrePorPlato2.PlatoId = nuevoPlato.Id;
 
-            ingrePorPlato1.IngredienteId = ingrediente1.Id;
-            ingrePorPlato2.IngredienteId = ingrediente2.Id;
+            //ingrePorPlato1.IngredienteId = ingrediente1.Id;
+            //ingrePorPlato2.IngredienteId = ingrediente2.Id;
 
             dbContext.IngredientesPorPlatos.Add(ingrePorPlato1);
             dbContext.IngredientesPorPlatos.Add(ingrePorPlato2);
@@ -38,5 +38,6 @@ namespace RestauranteQR.Models
 
 
         }
+
     }
 }

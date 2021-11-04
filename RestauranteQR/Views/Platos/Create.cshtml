@@ -1,4 +1,4 @@
-﻿@model RestauranteQR.ViewModel.VMIngredientesPorPlato
+﻿@model RestauranteQR.Models.Plato
 
 
 @{
@@ -16,25 +16,25 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Plato.Nombre" class="control-label"></label>
-                <input asp-for="Plato.Nombre" class="form-control" />
-                <span asp-validation-for="Plato.Nombre" class="text-danger"></span>
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
 
-                <label asp-for="Plato.Precio" class="control-label"></label>
-                <input asp-for="Plato.Precio" class="form-control" />
-                <span asp-validation-for="Plato.Precio" class="text-danger"></span>
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
 
-                <label asp-for="Plato.Ingrediente1" class="control-label"></label>
-                <select asp-for="Plato.Ingrediente1" class="form-control" asp-items="ViewBag.Ingrediente1"></select>
-                <span asp-validation-for="Plato.Ingrediente1" class="text-danger"></span>
+                <label asp-for="Ingrediente1Id" class="control-label"></label>
+                <select asp-for="Ingrediente1Id" class="form-control" asp-items="ViewBag.Ingrediente1"></select>
+                <span asp-validation-for="Ingrediente1Id" class="text-danger"></span>
 
                 </br>
                 </br>
 
-                <label asp-for="Plato.Ingrediente2" class="control-label"></label>
+                <label asp-for="Ingrediente2Id" class="control-label"></label>
                
-                <select asp-for="Plato.Ingrediente2" class="form-control" asp-items="ViewBag.Ingrediente2"></select> @*agregar placeholder*@
-                <span asp-validation-for="Plato.Ingrediente2" class="text-danger"></span>
+                <select asp-for="Ingrediente2Id" class="form-control" asp-items="ViewBag.Ingrediente2"></select> @*agregar placeholder*@
+                <span asp-validation-for="Ingrediente2Id" class="text-danger"></span>
 
             </div>
             <div class="form-group">
