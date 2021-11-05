@@ -7,6 +7,7 @@ namespace RestauranteQR.ViewModel
 {
     public class VMPedido
     {
+        public int MesaId { get; set; }
         public List<VMPedidoItem> ListaVMPedidoItem { get; set; }
     }
     public class VMPedidoItem

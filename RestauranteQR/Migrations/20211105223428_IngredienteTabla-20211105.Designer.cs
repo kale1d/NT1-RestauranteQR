@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestauranteQR.BaseDatos;
 
 namespace RestauranteQR.Migrations
 {
     [DbContext(typeof(RestoDbContext))]
-    partial class RestoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211105223428_IngredienteTabla-20211105")]
+    partial class IngredienteTabla20211105
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
