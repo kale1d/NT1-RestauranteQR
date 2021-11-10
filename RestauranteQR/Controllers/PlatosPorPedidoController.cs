@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,23 +10,22 @@ using RestauranteQR.Models;
 
 namespace RestauranteQR.Controllers
 {
-    [Authorize]
-    public class IngredientesController : Controller
+    public class PlatosPorPedidoController : Controller
     {
         private readonly RestoDbContext _context;
 
-        public IngredientesController(RestoDbContext context)
+        public PlatosPorPedidoController(RestoDbContext context)
         {
             _context = context;
         }
 
-        // GET: Ingredientes
+        // GET: PlatosPorPedido
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ingredientes.ToListAsync());
+            return View(await _context.PlatosPorPedido.ToListAsync());
         }
 
-        // GET: Ingredientes/Details/5
+        // GET: PlatosPorPedido/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +33,39 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var ingrediente = await _context.Ingredientes
+            var platosPorPedido = await _context.PlatosPorPedido
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ingrediente == null)
+            if (platosPorPedido == null)
             {
                 return NotFound();
             }
 
-            return View(ingrediente);
+            return View(platosPorPedido);
         }
 
-        // GET: Ingredientes/Create
+        // GET: PlatosPorPedido/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Ingredientes/Create
+        // POST: PlatosPorPedido/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Cantidad")] Ingrediente ingrediente)
+        public async Task<IActionResult> Create([Bind("Id,PedidoId,MesaId,PlatoId,Cantidad")] PlatosPorPedido platosPorPedido)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ingrediente);
+                _context.Add(platosPorPedido);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ingrediente);
+            return View(platosPorPedido);
         }
 
-        // GET: Ingredientes/Edit/5
+        // GET: PlatosPorPedido/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +73,22 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var ingrediente = await _context.Ingredientes.FindAsync(id);
-            if (ingrediente == null)
+            var platosPorPedido = await _context.PlatosPorPedido.FindAsync(id);
+            if (platosPorPedido == null)
             {
                 return NotFound();
             }
-            return View(ingrediente);
+            return View(platosPorPedido);
         }
 
-        // POST: Ingredientes/Edit/5
+        // POST: PlatosPorPedido/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Cantidad")] Ingrediente ingrediente)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PedidoId,MesaId,PlatoId,Cantidad")] PlatosPorPedido platosPorPedido)
         {
-            if (id != ingrediente.Id)
+            if (id != platosPorPedido.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace RestauranteQR.Controllers
             {
                 try
                 {
-                    _context.Update(ingrediente);
+                    _context.Update(platosPorPedido);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IngredienteExists(ingrediente.Id))
+                    if (!PlatosPorPedidoExists(platosPorPedido.Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +113,10 @@ namespace RestauranteQR.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ingrediente);
+            return View(platosPorPedido);
         }
 
-        // GET: Ingredientes/Delete/5
+        // GET: PlatosPorPedido/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +124,30 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var ingrediente = await _context.Ingredientes
+            var platosPorPedido = await _context.PlatosPorPedido
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ingrediente == null)
+            if (platosPorPedido == null)
             {
                 return NotFound();
             }
 
-            return View(ingrediente);
+            return View(platosPorPedido);
         }
 
-        // POST: Ingredientes/Delete/5
+        // POST: PlatosPorPedido/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ingrediente = await _context.Ingredientes.FindAsync(id);
-            _context.Ingredientes.Remove(ingrediente);
+            var platosPorPedido = await _context.PlatosPorPedido.FindAsync(id);
+            _context.PlatosPorPedido.Remove(platosPorPedido);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IngredienteExists(int id)
+        private bool PlatosPorPedidoExists(int id)
         {
-            return _context.Ingredientes.Any(e => e.Id == id);
+            return _context.PlatosPorPedido.Any(e => e.Id == id);
         }
     }
 }

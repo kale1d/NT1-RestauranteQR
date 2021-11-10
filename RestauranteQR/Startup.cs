@@ -26,10 +26,20 @@ namespace RestauranteQR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(ConfiguracionCookie);
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+                opciones =>
+                {
+                    opciones.LoginPath = "/Login/Login";
+                    opciones.AccessDeniedPath = "/Login/NoAutorizado";
+                    opciones.LogoutPath = "/Login/Salir";
+                }
+            );
             services.AddControllersWithViews();
-            services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"Data Source=/Users/fidustap/ORT/2Cuat/NT1/RestauranteQR/RestauranteQR/BaseDatos/IngredienteTabla.db"));
+            //services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"Data Source=/Users/fidustap/ORT/2Cuat/NT1/RestauranteQR/RestauranteQR/BaseDatos/IngredienteTabla.db")); den
+            services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\matih\OneDrive\Escritorio\ORT\PROGRAMACION EN NUEVAS TECNOLOGIAS 1\NT1-RestauranteQR\RestauranteQR\BaseDatos\IngredienteTabla.db")); //mati
         }
+
+       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,6 +61,8 @@ namespace RestauranteQR
 
             app.UseAuthorization();
 
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -61,11 +73,11 @@ namespace RestauranteQR
             app.UseCookiePolicy();
         }
 
-        public static void ConfiguracionCookie(CookieAuthenticationOptions opciones)
-        {
-            opciones.LoginPath = "/Login/Login";
-            opciones.AccessDeniedPath = "/Login/NoAutorizado";
-            opciones.LogoutPath = "/Login/Logout";
-        }
+        //public static void ConfiguracionCookie(CookieAuthenticationOptions opciones)
+        //{
+        //    opciones.LoginPath = "/Login/Login";
+        //    opciones.AccessDeniedPath = "/Login/NoAutorizado";
+        //    opciones.LogoutPath = "/Login/Logout";
+        //}
     }
 }

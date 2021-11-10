@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RestauranteQR.BaseDatos;
 using RestauranteQR.Models;
+using RestauranteQR.ViewModel;
 
 namespace RestauranteQR.Controllers
 {
@@ -25,7 +26,7 @@ namespace RestauranteQR.Controllers
         // GET: Pedidos
         public async Task<IActionResult> Index()
         {
-            var restoDbContext = _context.Pedidos.Include(p => p.Mesa);
+            var restoDbContext = _context.Pedidos.Include(p => p.MesaId);
             return View(await restoDbContext.ToListAsync());
         }
 
@@ -38,7 +39,7 @@ namespace RestauranteQR.Controllers
             }
 
             var pedido = await _context.Pedidos
-                .Include(p => p.Mesa)
+                .Include(p => p.MesaId)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pedido == null)
             {
@@ -53,12 +54,12 @@ namespace RestauranteQR.Controllers
         {
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id");
             ViewModel.VMPedido modelo = new ViewModel.VMPedido();
-            modelo.ListaVMPedidoItem = new List<ViewModel.VMPedidoItem>();
+            modelo.ListaVMPedidoItem = new List<PlatosPorPedido>();
             foreach (var item in _context.Platos.ToList())
             {
-                modelo.ListaVMPedidoItem.Add(new ViewModel.VMPedidoItem()
+                modelo.ListaVMPedidoItem.Add(new PlatosPorPedido()
                 {
-                    IdPlato = item.Id,
+                    PlatoId = item.Id,
                     NombrePlato = item.Nombre,
                     PrecioPlato = item.Precio
                 });
@@ -81,11 +82,14 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Pedido pedido)
+        public async Task<IActionResult> Create(VMPedido pedido) /*List<PlatosPorPedido> platoPorPedido*/
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pedido);
+                //Console.WriteLine(ViewModel.VMPedido);
+                //Console.WriteLine(platoPorPedido);
+                //Console.WriteLine(Request['cantidad'].ToString());
+                RNPedido.AgregarPedido(_context, pedido); /*platoPorPedido*/
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -115,7 +119,7 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MesaId")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MesaId")] VMPedido pedido)
         {
             if (id != pedido.Id)
             {
@@ -156,7 +160,7 @@ namespace RestauranteQR.Controllers
             }
 
             var pedido = await _context.Pedidos
-                .Include(p => p.Mesa)
+                .Include(p => p.MesaId)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pedido == null)
             {

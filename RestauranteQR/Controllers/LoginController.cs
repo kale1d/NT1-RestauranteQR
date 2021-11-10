@@ -39,17 +39,17 @@ namespace RestauranteQR.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string email, string password, Rol rol)
+        public IActionResult Login(string Email, string Password, Rol Rol)
         {
             string returnUrl = TempData[_Return_Url] as string;
 
-            if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password))
+            if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
             {
-                Administrador usuario = null;
+                Usuario usuario = null;
 
-                if (rol == Rol.Administrador)
+                if (Rol == Rol.Administrador)
                 {
-                    usuario = _context.Administradores.FirstOrDefault(o => o.Email.ToUpper() == email.ToUpper() && password == o.Password);
+                    usuario = _context.Administradores.FirstOrDefault(o => o.Email.ToUpper() == Email.ToUpper() && Password == o.Password);
                 }
                 
 
@@ -62,10 +62,10 @@ namespace RestauranteQR.Controllers
                     identity.AddClaim(new Claim(ClaimTypes.Name, usuario.Nombre));
 
                     // Se utilizará para la autorización por roles
-                    identity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, usuario.Rol.ToString()));
 
                     // Lo utilizaremos para acceder al Id del usuario que se encuentra en el sistema.
-                    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
+                    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Email.ToString()));
 
                     // Lo utilizaremos cuando querramos mostrar el nombre del usuario logueado en el sistema.
                     identity.AddClaim(new Claim(ClaimTypes.GivenName, usuario.Nombre));
@@ -82,13 +82,18 @@ namespace RestauranteQR.Controllers
                     if (!string.IsNullOrWhiteSpace(returnUrl))
                         return Redirect(returnUrl);
 
+                    //if(usuario != null)
+                    //{
+                    //    return RedirectToAction("Index", "Ingredientes");
+                    //}
+
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
             }
 
             // Completo estos dos campos para poder retornar a la vista en caso de errores.
             ViewBag.Error = "Usuario o contraseña incorrectos";
-            ViewBag.Email = email;
+            ViewBag.Email = Email;
             TempData[_Return_Url] = returnUrl;
 
             return View();
@@ -108,7 +113,6 @@ namespace RestauranteQR.Controllers
         {
             return View();
         }
-
 
     }
 }

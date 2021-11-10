@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestauranteQR.BaseDatos;
 
 namespace RestauranteQR.Migrations
 {
     [DbContext(typeof(RestoDbContext))]
-    partial class RestoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211110182454_mgaco6")]
+    partial class mgaco6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,17 +148,11 @@ namespace RestauranteQR.Migrations
                     b.Property<int>("MesaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("NombrePlato")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("PedidoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("PlatoId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<double>("PrecioPlato")
-                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

@@ -112,7 +112,7 @@ namespace RestauranteQR.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Precio")] Plato plato)
+        public async Task<IActionResult> Edit(int id, Plato plato)
         {
             if (id != plato.Id)
             {
@@ -123,6 +123,7 @@ namespace RestauranteQR.Controllers
             {
                 try
                 {
+                   
                     _context.Update(plato);
                     await _context.SaveChangesAsync();
                 }
@@ -134,6 +135,7 @@ namespace RestauranteQR.Controllers
                     }
                     else
                     {
+                        RNPlato.ModificarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.IngredienteId1, plato.IngredienteId2);
                         throw;
                     }
                 }

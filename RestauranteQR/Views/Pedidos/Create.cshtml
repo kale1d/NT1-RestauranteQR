@@ -40,14 +40,14 @@
                 </div>
                 <div class="row quantity">
                     <div>
-                        <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].IdPlato" />
+                        <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].PlatoId" /> @*id="cantidad"*@
 
                     </div>
                     <div>
                     <input type="button" value="+" onclick="Agregar(@i)" />
                     </div>
                     <div>
-                        @Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)
+                      <input asp-for="ListaVMPedidoItem[i].Cantidad" value="@Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)"/> 
 
                     </div>
 
