@@ -31,13 +31,13 @@
         {
 
             <div class="row size align-content-center">
-                <div class="col-md">
-                    @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].NombrePlato)
-                </div>
-                <div class="col-sm">
-                    <span>$</span>
-                    @Html.DisplayFor(modelItem => Model.ListaVMPedidoItem[i].PrecioPlato)
-                </div>
+            
+                   <input asp-for="@Model.ListaVMPedidoItem[i].NombrePlato" class="col-md" value="@Model.ListaVMPedidoItem[i].NombrePlato" type="text" disabled/> 
+                
+                   <div class="col-sm">
+                       <span>$</span>
+                       <input asp-for="@Model.ListaVMPedidoItem[i].PrecioPlato" value="@Model.ListaVMPedidoItem[i].PrecioPlato" type="text" disabled />
+                   </div>
                 <div class="row quantity">
                     <div>
                         <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].PlatoId" /> @*id="cantidad"*@
@@ -47,7 +47,7 @@
                     <input type="button" value="+" onclick="Agregar(@i)" />
                     </div>
                     <div>
-                      <input asp-for="ListaVMPedidoItem[i].Cantidad" value="@Html.TextBoxFor(m => Model.ListaVMPedidoItem[i].Cantidad)"/> 
+                      <input asp-for="ListaVMPedidoItem[i].Cantidad" value="@Model.ListaVMPedidoItem[i].Cantidad"/> 
 
                     </div>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -61,8 +62,9 @@ namespace RestauranteQR.Controllers
                 {
                     PlatoId = item.Id,
                     NombrePlato = item.Nombre,
-                    PrecioPlato = item.Precio
-                });
+                    PrecioPlato = item.Precio,
+                    Cantidad = 0,
+                }) ;
             }
             return View(modelo);
         }
@@ -84,15 +86,26 @@ namespace RestauranteQR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VMPedido pedido) /*List<PlatosPorPedido> platoPorPedido*/
         {
+
             if (ModelState.IsValid)
             {
-                //Console.WriteLine(ViewModel.VMPedido);
-                //Console.WriteLine(platoPorPedido);
-                //Console.WriteLine(Request['cantidad'].ToString());
+               
                 RNPedido.AgregarPedido(_context, pedido); /*platoPorPedido*/
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            else
+            {
+                var message = string.Join(" | ", ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage));
+                 var errors = ModelState.Select(x => x.Value.Errors)
+                           .Where(y => y.Count > 0)
+                           .ToList();
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest, message);
+            }
+
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
             return View(pedido);
         }
