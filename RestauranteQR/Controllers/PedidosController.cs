@@ -27,11 +27,14 @@ namespace RestauranteQR.Controllers
         // GET: Pedidos
         public async Task<IActionResult> Index()
         {
-            var restoDbContext = _context.Pedidos.Include(p => p.MesaId);
+              var restoDbContext = _context.Pedidos;
             return View(await restoDbContext.ToListAsync());
         }
+      
 
         // GET: Pedidos/Details/5
+        //recibir el id del pedido y buscar el pedido, en la tabla platos por pedido buscar el id de los platos y en platos
+        //buscar el nombre y el precio (sumar el precio de cada plato e informar el total)
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,8 +43,10 @@ namespace RestauranteQR.Controllers
             }
 
             var pedido = await _context.Pedidos
-                .Include(p => p.MesaId)
+                .Include(p => p.Id)
                 .FirstOrDefaultAsync(m => m.Id == id);
+       
+
             if (pedido == null)
             {
                 return NotFound();
@@ -69,19 +74,7 @@ namespace RestauranteQR.Controllers
             return View(modelo);
         }
 
-        //public IActionResult AgregarPlato()
-        //{
-        //enTextoClaroEs: this.platos.add(platoEnviadoAlHacerClcik);
-        //}
-
-        //public IActionResult SacarPlato()
-        //{
-        //enTextoClaroEs: this.platos.remove(platoEnviadoAlHacerClcik);
-        //}
-
-        // POST: Pedidos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VMPedido pedido) /*List<PlatosPorPedido> platoPorPedido*/
@@ -108,6 +101,7 @@ namespace RestauranteQR.Controllers
 
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
             return View(pedido);
+            //ACa hay que pasar el id del pedido para details.
         }
 
         // GET: Pedidos/Edit/5
@@ -123,8 +117,8 @@ namespace RestauranteQR.Controllers
             {
                 return NotFound();
             }
-            ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
-            return View(pedido);
+            //ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
+            return RedirectToAction(nameof(Details));
         }
 
         // POST: Pedidos/Edit/5
@@ -158,7 +152,7 @@ namespace RestauranteQR.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details));
             }
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
             return View(pedido);

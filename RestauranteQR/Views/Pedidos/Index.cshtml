@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RestauranteQR.Models.Pedido>
+﻿model IEnumerable<RestauranteQR.Models.Pedido>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Mesa)
+              Pepe
             </th>
             <th></th>
         </tr>
@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Mesa.Id)
+                @Html.DisplayFor(modelItem => item.MesaId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

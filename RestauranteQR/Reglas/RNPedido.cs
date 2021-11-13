@@ -45,8 +45,15 @@
                                 {
                                  if(pedido2.Id == p.PedidoId)
                                  {
-                                    ing.Cantidad -= p.Cantidad;
+                                    var cant = ing.Cantidad -= p.Cantidad;
+                                    if(cant >=0)
+                                    {
                                     _dbContext.Ingredientes.Update(ing);
+                                    } else
+                                    {
+                                        //podriamos retornar una view;
+                                        throw new Exception("NO HAY CANTIDAD SUFICIENTE de " + plato.Nombre);
+                                    }
                                    }
                                  }
                             }
