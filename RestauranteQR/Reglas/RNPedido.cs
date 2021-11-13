@@ -1,47 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using RestauranteQR.BaseDatos;
-using RestauranteQR.ViewModel;
+﻿    using System;
+    using System.Collections.Generic;
+    using RestauranteQR.BaseDatos;
+    using RestauranteQR.ViewModel;
 
-namespace RestauranteQR.Models
-{
-    public class RNPedido
+    namespace RestauranteQR.Models
     {
-
-        public static void AgregarPedido(RestoDbContext _dbContext, VMPedido pedido)   /*List<PlatosPorPedido> platosPorPedido*/
+        public class RNPedido
         {
-            var pedido2 = new Pedido();
-            pedido2.Id = pedido.Id;
-            pedido2.MesaId = pedido.MesaId;
-            _dbContext.Add(pedido2);
-            _dbContext.SaveChanges();
 
-            foreach (var plato in pedido.ListaVMPedidoItem.ToArray())
+            public static void AgregarPedido(RestoDbContext _dbContext, VMPedido pedido)   /*List<PlatosPorPedido> platosPorPedido*/
             {
-                Console.Write(plato);
-                plato.PedidoId = pedido2.Id;
-                plato.MesaId = pedido2.MesaId;
-                _dbContext.PlatosPorPedido.Add(plato);
+                var pedido2 = new Pedido();
+                pedido2.Id = pedido.Id;
+                pedido2.MesaId = pedido.MesaId;
+                _dbContext.Add(pedido2);
+                _dbContext.SaveChanges();
+
+                foreach (var platoPorPedido in pedido.ListaVMPedidoItem)
+                {
+                platoPorPedido.PedidoId = pedido2.Id;
+                platoPorPedido.MesaId = pedido2.MesaId;
+                    if (platoPorPedido.Cantidad > 0) {
+                    _dbContext.PlatosPorPedido.Add(platoPorPedido);
+                    }
+
+                }
+                    _dbContext.SaveChanges();
+
+                var platosPedidos = _dbContext.PlatosPorPedido;
+                var platos = _dbContext.Platos;
+                var ingredientes = _dbContext.Ingredientes;
+
+
+                foreach (var p in platosPedidos)
+                {
+                
+                    foreach (var plato in platos)
+                    {
+                        if (p.PlatoId == plato.Id)
+                        {
+                            foreach (var ing in ingredientes)
+                            {
+                                if (plato.IngredienteId1 == ing.Id || plato.IngredienteId2 == ing.Id)
+                                {
+                                 if(pedido2.Id == p.PedidoId)
+                                 {
+                                    ing.Cantidad -= p.Cantidad;
+                                    _dbContext.Ingredientes.Update(ing);
+                                   }
+                                 }
+                            }
+                        }
+                    }
+                }
+                _dbContext.SaveChanges();
+           
+
             }
-
-            _dbContext.SaveChanges();
-            //foreach (Plato p in pedido.Platos)
-            //{
-            //    PlatosPorPedido pxp = new PlatoPorPedido();
-            //    pxp.PlatoId = p.Id;
-            //    pxp.NombrePlato = p.Nombre;
-            //    pxp.PrecioPlato = p.Precio;
-            //    pxp.Cantidad = 10;
-
-            //    _dbContext.PlatosPorPedido.Add(pxp);
-            //}
-            //_dbContext.Pedidos.Add(pedido);
-            //_dbContext.PlatosPorPedido.Add(platosPorPedido);
-            //for ()
-            //{
-            //    _dbContext.PlatosPorPedido.Add(platosPorPedido);
-            //}
-
         }
     }
-}

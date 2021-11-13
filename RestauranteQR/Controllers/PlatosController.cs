@@ -13,6 +13,7 @@ using RestauranteQR.ViewModel;
 namespace RestauranteQR.Controllers
 {
     //[Authorize(Roles = nameof(Rol.Administrador))]
+    [Authorize]
     public class PlatosController : Controller
     {
         private readonly RestoDbContext _context;
