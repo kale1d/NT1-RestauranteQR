@@ -42,17 +42,38 @@ namespace RestauranteQR.Controllers
                 return NotFound();
             }
 
-            var pedido = await _context.Pedidos
-                .Include(p => p.Id)
-                .FirstOrDefaultAsync(m => m.Id == id);
-       
-
-            if (pedido == null)
+            var platosPorPedido = _context.PlatosPorPedido.ToList();
+            var platos = _context.Platos;
+            List<PlatosPorPedido> platosEnc = new List<PlatosPorPedido>();
+            //CHEQUAR FOREACH, NO TRAE BIEN LA VISTA DE CUANTOS PLATOS SE PIDEN
+            foreach (var pp in platosPorPedido)
             {
-                return NotFound();
+                if(pp.Id == id)
+                {
+                    foreach (var pla in platos)
+                    {
+                        if(pp.PlatoId == pla.Id)
+                        {
+                            pp.NombrePlato = pla.Nombre;
+                            pp.PrecioPlato = pla.Precio;
+                            platosEnc.Add(pp);
+                    
+                        }
+                    }
+                }
             }
 
-            return View(pedido);
+            //var pedido = await _context.Pedidos
+            //    .Include(p => p.Id)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+       
+
+            //if (pedido == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return View(platosEnc);
         }
 
         // GET: Pedidos/Create
@@ -85,7 +106,8 @@ namespace RestauranteQR.Controllers
                
                 RNPedido.AgregarPedido(_context, pedido); /*platoPorPedido*/
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Details", new { id = pedido.Id}); //nameof(Index)
             }
 
             else
