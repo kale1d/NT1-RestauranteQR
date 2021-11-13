@@ -3,6 +3,35 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Les damos la bienvenida a RestoQR</h1>
-    <p>Para ver nuestro menu, hace <a asp-controller="Home" asp-action="Carta">click aqui</a></p>
+    <h1 class="display-4 ppal">Les damos la bienvenida a RestoQR</h1>
+    <div class="row flyers">
+        <div class="col-6 car">
+            <a asp-controller="Home" asp-action="Carta"><img src="~/Imagenes/carta1.jpg"></a>
+        </div>
+        <div class="col-6 ped">
+            <a asp-controller="Pedidos" asp-action="Create"><img src="~/Imagenes/pedido1.jpg"></a>
+        </div>
+    </div>
+    
+
 </div>
+<style>
+    .ppal {
+        color: #542580;
+        font-size: 80px;
+    }
+
+    .car img{
+        width: 100%;
+    }
+    .ped img {
+        width: 70%;
+    }
+
+
+    .flyers{
+        padding: 0;
+        margin-top: 50px;
+        
+    }
+</style>
