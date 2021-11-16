@@ -41,39 +41,45 @@ namespace RestauranteQR.Controllers
             {
                 return NotFound();
             }
+           
+                var platosPorPedido = _context.PlatosPorPedido.ToList();
+                var platos = _context.Platos;
+                var total = 0.00;
+            
 
-            var platosPorPedido = _context.PlatosPorPedido.ToList();
-            var platos = _context.Platos;
             List<PlatosPorPedido> platosEnc = new List<PlatosPorPedido>();
-            //CHEQUAR FOREACH, NO TRAE BIEN LA VISTA DE CUANTOS PLATOS SE PIDEN
-            foreach (var pp in platosPorPedido)
-            {
-                if(pp.Id == id)
+               
+                foreach (var pp in platosPorPedido)
                 {
-                    foreach (var pla in platos)
+
+                    if (pp.PedidoId == id)
                     {
-                        if(pp.PlatoId == pla.Id)
+                        foreach (var pla in platos)
                         {
-                            pp.NombrePlato = pla.Nombre;
-                            pp.PrecioPlato = pla.Precio;
-                            platosEnc.Add(pp);
-                    
+                            if (pp.PlatoId == pla.Id)
+                            {
+                                pp.NombrePlato = pla.Nombre;
+                                pp.PrecioPlato = pla.Precio;
+                                platosEnc.Add(pp);
+                                total += (pp.PrecioPlato * pp.Cantidad);
+
+                            }
                         }
                     }
                 }
-            }
 
             //var pedido = await _context.Pedidos
             //    .Include(p => p.Id)
             //    .FirstOrDefaultAsync(m => m.Id == id);
-       
+
 
             //if (pedido == null)
             //{
             //    return NotFound();
             //}
-
+            ViewData["total"] = total;
             return View(platosEnc);
+           
         }
 
         // GET: Pedidos/Create
