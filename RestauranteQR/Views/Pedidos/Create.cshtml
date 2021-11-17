@@ -10,17 +10,6 @@
         <p>
             <h2>Mi pedido</h2>
         </p>
-            @*<thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Precio)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>*@
     <form asp-action="Create">
         <div class="row">
             <label asp-for="MesaId" class="control-label"></label>
@@ -40,7 +29,7 @@
                    </div>
                 <div class="row quantity">
                     <div>
-                        <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].PlatoId" /> @*id="cantidad"*@
+                        <input type="hidden" asp-for="@Model.ListaVMPedidoItem[i].PlatoId" /> 
 
                     </div>
                     <div>
@@ -66,10 +55,6 @@
         <script>
 
             function Agregar(indiceTocado) {
-                //vamos a hacer que sume el innerHtml para que muestre la cantidad correcta en el textbox //, new {arroba type = "number" }
-                //var valor = document.getElementById('ListaVMPeidoItem_' + indiceTocado + '__Cantidad');
-                //alert(valor.value);
-                console.log('indice', indiceTocado)
 
                 var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
                 var num = parseInt(elemento.value);
@@ -79,9 +64,6 @@
             }
 
             function Restar(indiceTocado) {
-                //vamos a hacer que reste el innerHtml para que muestre la cantidad correcta en el textbox
-                //var valor = document.getElementById('ListaVMPeidoItem_' + indiceTocado + '__Cantidad');
-                //alert(valor.value);
 
                 var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
                 var num = parseInt(elemento.value);
@@ -92,16 +74,9 @@
 
             }
 
-            //function Dev() {
-            //   ListaVMPedidoItem misPedidos = new ListaVMPedidoItem();
-            //    return misPedidos;
-           // }
-
         </script>
 
     <style>
-        .quantity {
-        }
         .line {
             width: 100%;
             border-bottom: 1px solid lightgrey;

@@ -8,11 +8,11 @@ namespace RestauranteQR.Models
     public class RNPedido
     {
 
-        public static void AgregarPedido(RestoDbContext _dbContext, VMPedido pedido)   /*List<PlatosPorPedido> platosPorPedido*/
+        public static void AgregarPedido(RestoDbContext _dbContext, VMPedido pedido)   
         {
             _dbContext.Database.BeginTransaction();
             var pedido2 = new Pedido();
-            pedido2.Id = pedido.Id;
+           // pedido2.Id = pedido.Id;
             pedido2.MesaId = pedido.MesaId;
             _dbContext.Add(pedido2);
             _dbContext.SaveChanges();
@@ -53,7 +53,6 @@ namespace RestauranteQR.Models
                                         _dbContext.Ingredientes.Update(ing);
                                     } else
                                     {
-                                        //podriamos retornar una view;
                                         throw new Exception("NO HAY CANTIDAD SUFICIENTE de " + plato.Nombre);
                                     }
                                 }

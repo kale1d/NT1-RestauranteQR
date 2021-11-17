@@ -68,15 +68,7 @@ namespace RestauranteQR.Controllers
                     }
                 }
 
-            //var pedido = await _context.Pedidos
-            //    .Include(p => p.Id)
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-
-
-            //if (pedido == null)
-            //{
-            //    return NotFound();
-            //}
+      
             ViewData["total"] = total;
             return View(platosEnc);
            
@@ -104,16 +96,16 @@ namespace RestauranteQR.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(VMPedido pedido) /*List<PlatosPorPedido> platoPorPedido*/
+        public async Task<IActionResult> Create(VMPedido pedido) 
         {
 
             if (ModelState.IsValid)
             {
                
-                RNPedido.AgregarPedido(_context, pedido); /*platoPorPedido*/
+                RNPedido.AgregarPedido(_context, pedido); 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Details", new { id = pedido.Id}); //nameof(Index)
+                return RedirectToAction("Details", new { id = pedido.Id}); 
             }
 
             else
@@ -124,12 +116,12 @@ namespace RestauranteQR.Controllers
                  var errors = ModelState.Select(x => x.Value.Errors)
                            .Where(y => y.Count > 0)
                            .ToList();
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest, message);
+                
             }
 
             ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
             return View(pedido);
-            //ACa hay que pasar el id del pedido para details.
+       
         }
 
         // GET: Pedidos/Edit/5
@@ -145,7 +137,7 @@ namespace RestauranteQR.Controllers
             {
                 return NotFound();
             }
-            //ViewData["MesaId"] = new SelectList(_context.Mesa, "Id", "Id", pedido.MesaId);
+  
             return RedirectToAction(nameof(Details));
         }
 

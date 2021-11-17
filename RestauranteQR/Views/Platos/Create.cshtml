@@ -8,7 +8,7 @@
 }
 
 <h1>Create</h1>
-@*<h4>@ViewBag.Nombre</h4>*@
+
 <h4>Plato</h4>
 <hr />
 <div class="row">
@@ -34,7 +34,7 @@
 
                 <label asp-for="IngredienteId2" class="control-label"></label>
                
-                <select asp-for="IngredienteId2" class="form-control" asp-items="ViewBag.IngredienteId2"></select> @*agregar placeholder*@
+                <select asp-for="IngredienteId2" class="form-control" asp-items="ViewBag.IngredienteId2"></select> 
                 <span asp-validation-for="IngredienteId2" class="text-danger"></span>
 
             </div>

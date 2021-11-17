@@ -64,7 +64,7 @@ namespace RestauranteQR.Controllers
         // GET: Platos/Create
         public ActionResult Create()
         {
-            //ViewBag.Nombre="Mati";
+      
 
             
             Plato plato = new Plato();
@@ -105,6 +105,12 @@ namespace RestauranteQR.Controllers
             {
                 return NotFound();
             }
+
+            //Plato plato = new Plato();
+            var ingredientes = _context.Ingredientes;
+            ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
+            ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
+
             return View(plato);
         }
 

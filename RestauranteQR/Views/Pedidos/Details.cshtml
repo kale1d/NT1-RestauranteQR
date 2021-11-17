@@ -37,26 +37,17 @@
                         @Html.DisplayFor(modelItem => item.NombrePlato)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PrecioPlato)
+                        $@Html.DisplayFor(modelItem => item.PrecioPlato)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Cantidad)
 
                     </td>
-                    @*<td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                    </td>*@
+               
                 </tr>
             }
     </table>
-    @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Platos)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Platos[0].Id)
-        </dd>*@
+
 
 
 
@@ -65,10 +56,10 @@
 
 <div>
     <h3 style="text-align: center;">
-        El total fue: @ViewBag.total
+        El total fue: $@ViewBag.total
         </h3>
 </div>
 <div>
-    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@ |
+
     <a asp-action="Create">Back to List</a>
 </div>
