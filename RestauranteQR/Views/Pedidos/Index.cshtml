@@ -1,25 +1,79 @@
-﻿model IEnumerable<RestauranteQR.Models.Pedido>
+﻿@model IEnumerable<RestauranteQR.Models.PlatosPorPedido>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Pedidos</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-              Pepe
+                @Html.DisplayNameFor(model => model.PedidoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MesaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombrePlato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 
+        @for (int i = 0; i < Model.ToList().Count; i++)
+        {
+            var item = Model.ToList()[i];
+        <tr>
+            @if (i > 0)
+            {
+                @if (Model.ToList()[i - 1].PedidoId != item.PedidoId)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PedidoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MesaId)
+                    </td>
+
+                }
+                else
+                {
+                    <td>
+                        "
+                    </td>
+                    <td>
+                        "
+                    </td>
+                }
+
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PedidoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MesaId)
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NombrePlato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+        </tr>
+
+        }
+
     </tbody>
-</table>
+    </table>

@@ -1,0 +1,66 @@
+﻿@model RestauranteQR.Models.Plato
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Falta de stock</h1>
+
+<div>
+
+    <h5>No hay mas: @ViewBag.nomPla</h5>
+    <hr />
+    @*<table class="table">
+        <dl class="row">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombrePlato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioPlato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+
+        </tr>
+
+        </dl>
+
+  
+            @foreach (var item in Model)
+            {
+                <br />
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombrePlato)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.PrecioPlato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+
+                    </td>
+               
+                </tr>
+            }
+    </table>*@
+
+
+
+
+</div>
+
+
+@*<div>
+    <h3 style="text-align: center;">
+        El total fue: $@ViewBag.total
+        </h3>
+</div>*@
+<div>
+
+    <a asp-action="Create">Back to List</a>
+</div>

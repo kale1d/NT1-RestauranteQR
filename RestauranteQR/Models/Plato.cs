@@ -23,6 +23,7 @@ namespace RestauranteQR.Models
         [Display(Name = "Ingrediente 2")]
         public int? IngredienteId2 { get; set; }
 
+
         public Plato()
         {
         }

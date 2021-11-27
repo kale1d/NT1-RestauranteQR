@@ -12,7 +12,7 @@ namespace RestauranteQR.Models
         {
             _dbContext.Database.BeginTransaction();
             var pedido2 = new Pedido();
-           // pedido2.Id = pedido.Id;
+            // pedido2.Id = pedido.Id;
             pedido2.MesaId = pedido.MesaId;
             _dbContext.Add(pedido2);
             _dbContext.SaveChanges();
@@ -51,9 +51,12 @@ namespace RestauranteQR.Models
                                     if (cant >= 0)
                                     {
                                         _dbContext.Ingredientes.Update(ing);
+                                        p.NombrePlato = plato.Nombre;
+                                        p.PrecioPlato = plato.Precio;
+                                        _dbContext.PlatosPorPedido.Update(p);
                                     } else
                                     {
-                                        throw new Exception("NO HAY CANTIDAD SUFICIENTE de " + plato.Nombre);
+                                        throw new Exception(plato.Nombre);
                                     }
                                 }
                             }
@@ -65,7 +68,6 @@ namespace RestauranteQR.Models
 
             _dbContext.Database.CommitTransaction();
         }
-        
     }
         
     }

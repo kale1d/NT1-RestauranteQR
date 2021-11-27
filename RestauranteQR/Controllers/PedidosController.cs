@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using RestauranteQR.ViewModel;
 
 namespace RestauranteQR.Controllers
 {
+    
     public class PedidosController : Controller
     {
 
@@ -25,9 +27,10 @@ namespace RestauranteQR.Controllers
         }
 
         // GET: Pedidos
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-              var restoDbContext = _context.Pedidos;
+              var restoDbContext = _context.PlatosPorPedido;
             return View(await restoDbContext.ToListAsync());
         }
       
@@ -74,6 +77,16 @@ namespace RestauranteQR.Controllers
            
         }
 
+
+        public async Task<IActionResult> ErrorPedido(string nombre)
+        {
+            //var platos = pedido.ListaVMPedidoItem;
+            //var elPlatoSinStock = platos.buscarElQueNoTieneStock ; //ESTO ESTA MAL
+            ////aca habria que conseguir el nombre del plato que no tiene stock del pedido, y pasarselo a la vista
+            ViewData["nomPla"] = nombre;
+            return View();
+        }
+
         // GET: Pedidos/Create
         public IActionResult Create()
         {
@@ -101,11 +114,17 @@ namespace RestauranteQR.Controllers
 
             if (ModelState.IsValid)
             {
-               
-                RNPedido.AgregarPedido(_context, pedido); 
-                await _context.SaveChangesAsync();
+                try
+                {
+                    RNPedido.AgregarPedido(_context, pedido);
+                    await _context.SaveChangesAsync();
 
-                return RedirectToAction("Details", new { id = pedido.Id}); 
+                    return RedirectToAction("Details", new { id = pedido.Id });
+                }catch(Exception e)
+                {
+                    return RedirectToAction("ErrorPedido", new { nombre = e.Message });
+                }
+                 
             }
 
             else
