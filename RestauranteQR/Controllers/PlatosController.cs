@@ -68,10 +68,12 @@ namespace RestauranteQR.Controllers
 
             
             Plato plato = new Plato();
-            var ingredientes = _context.Ingredientes;
+            var ingredientes = _context.Ingredientes.ToList();
             ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
             ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
-           
+            ViewBag.Ingredientes = new SelectList(ingredientes, "Id", "Nombre");
+            ViewBag.IngredientesList = ingredientes;
+
             return View();
         }
 
@@ -84,7 +86,7 @@ namespace RestauranteQR.Controllers
         {
             if (ModelState.IsValid)
             {
-                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.IngredienteId1, plato.IngredienteId2);
+                RNPlato.AgregarPlato(_context, plato.Id, plato.Nombre, plato.Precio, Request.Form["ingredientesPorPlato"], Request.Form["ingredientesPorPlatoId"], Request.Form["ingredientesPorPlatoNombre"]);
                 //_context.Add(plato);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -107,9 +109,11 @@ namespace RestauranteQR.Controllers
             }
 
             //Plato plato = new Plato();
-            var ingredientes = _context.Ingredientes;
+            var ingredientes = _context.Ingredientes.ToList();
             ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
             ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
+            ViewBag.Ingredientes = ingredientes;
+
 
             return View(plato);
         }

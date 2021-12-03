@@ -9,19 +9,26 @@ namespace RestauranteQR.Models
 {
     
 
-    public class IngredientePorPlato
+    public class IngredientePlato
     {
 
         [Key]
         public int Id { get; set; }
 
+
+
+
         [ForeignKey(nameof(Plato))]
         public int PlatoId { get; set; }
+
+        public Plato Plato { get; set; }
 
         [ForeignKey(nameof(Ingrediente))]
         public int IngredienteId { get; set; }
 
- 
+        public Ingrediente Ingrediente { get; set; }
+
+
 
     }
 }

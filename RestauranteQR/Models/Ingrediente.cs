@@ -22,5 +22,9 @@ namespace RestauranteQR.Models
         {
             throw new NotImplementedException();
         }
+
+        public virtual  ICollection<Plato> Platos { get; set; }
+
+        public ICollection<IngredientePlato> IngredientePlatos { get; set; }
     }
 }

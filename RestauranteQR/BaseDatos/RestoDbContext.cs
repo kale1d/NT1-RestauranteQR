@@ -17,13 +17,41 @@ namespace RestauranteQR.BaseDatos
         public DbSet<Plato> Platos { get; set; }
 
         public DbSet<Mesa> Mesa { get; set; }
-        public DbSet<IngredientePorPlato> IngredientesPorPlatos { get; set; }
+        public DbSet<IngredientePlato> IngredientePlato { get; set; }
 
         public DbSet<Pedido> Pedidos { get; set; }
 
         public DbSet<Administrador> Administradores { get; set; }
 
         public DbSet<RestauranteQR.Models.PlatosPorPedido> PlatosPorPedido { get; set; }
-       
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<IngredientePlato>()
+        //        .HasKey(bc => new { bc.IngredienteId, bc.PlatoId });
+        //    modelBuilder.Entity<IngredientePlato>()
+        //        .HasOne(bc => bc.Ingrediente)
+        //        .WithMany(b => b.Platos)
+        //        .HasForeignKey(bc => bc.BookId);
+        //    modelBuilder.Entity<IngredientePlato>()
+        //        .HasOne(bc => bc.Plato)
+        //        .WithMany(c => c.Ingredientes)
+        //        .HasForeignKey(bc => bc.CategoryId);
+        //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IngredientePlato>()
+                .HasKey(bc => new { bc.IngredienteId, bc.PlatoId });
+            modelBuilder.Entity<IngredientePlato>()
+                .HasOne(bc => bc.Ingrediente)
+                .WithMany(b => b.IngredientePlatos)
+                .HasForeignKey(bc => bc.IngredienteId);
+            modelBuilder.Entity<IngredientePlato>()
+                .HasOne(bc => bc.Plato)
+                .WithMany(c => c.IngredientePlatos)
+                .HasForeignKey(bc => bc.PlatoId);
+        }
+
     }
 }

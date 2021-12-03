@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestauranteQR.BaseDatos;
 
 namespace RestauranteQR.Migrations
 {
     [DbContext(typeof(RestoDbContext))]
-    partial class RestoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211202234349_migraotanea")]
+    partial class migraotanea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,27 +53,31 @@ namespace RestauranteQR.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("PlatoId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PlatoId");
 
                     b.ToTable("Ingredientes");
                 });
 
-            modelBuilder.Entity("RestauranteQR.Models.IngredientePlato", b =>
+            modelBuilder.Entity("RestauranteQR.Models.IngredientePorPlato", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("IngredienteId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("PlatoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Id");
 
-                    b.HasKey("IngredienteId", "PlatoId");
-
-                    b.HasIndex("PlatoId");
-
-                    b.ToTable("IngredientePlato");
+                    b.ToTable("IngredientesPorPlatos");
                 });
 
             modelBuilder.Entity("RestauranteQR.Models.Mesa", b =>
@@ -113,9 +119,6 @@ namespace RestauranteQR.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("IngredienteId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int?>("IngredienteId1")
                         .HasColumnType("INTEGER");
 
@@ -132,8 +135,6 @@ namespace RestauranteQR.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IngredienteId");
 
                     b.HasIndex("PedidoId");
 
@@ -169,23 +170,11 @@ namespace RestauranteQR.Migrations
                     b.ToTable("PlatosPorPedido");
                 });
 
-            modelBuilder.Entity("RestauranteQR.Models.IngredientePlato", b =>
+            modelBuilder.Entity("RestauranteQR.Models.Ingrediente", b =>
                 {
-                    b.HasOne("RestauranteQR.Models.Ingrediente", "Ingrediente")
-                        .WithMany("IngredientePlatos")
-                        .HasForeignKey("IngredienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RestauranteQR.Models.Plato", "Plato")
-                        .WithMany("IngredientePlatos")
-                        .HasForeignKey("PlatoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingrediente");
-
-                    b.Navigation("Plato");
+                    b.HasOne("RestauranteQR.Models.Plato", null)
+                        .WithMany("ListaIngredientes")
+                        .HasForeignKey("PlatoId");
                 });
 
             modelBuilder.Entity("RestauranteQR.Models.Pedido", b =>
@@ -201,20 +190,9 @@ namespace RestauranteQR.Migrations
 
             modelBuilder.Entity("RestauranteQR.Models.Plato", b =>
                 {
-                    b.HasOne("RestauranteQR.Models.Ingrediente", null)
-                        .WithMany("Platos")
-                        .HasForeignKey("IngredienteId");
-
                     b.HasOne("RestauranteQR.Models.Pedido", null)
                         .WithMany("Platos")
                         .HasForeignKey("PedidoId");
-                });
-
-            modelBuilder.Entity("RestauranteQR.Models.Ingrediente", b =>
-                {
-                    b.Navigation("IngredientePlatos");
-
-                    b.Navigation("Platos");
                 });
 
             modelBuilder.Entity("RestauranteQR.Models.Pedido", b =>
@@ -224,7 +202,7 @@ namespace RestauranteQR.Migrations
 
             modelBuilder.Entity("RestauranteQR.Models.Plato", b =>
                 {
-                    b.Navigation("IngredientePlatos");
+                    b.Navigation("ListaIngredientes");
                 });
 #pragma warning restore 612, 618
         }

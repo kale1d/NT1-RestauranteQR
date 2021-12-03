@@ -28,6 +28,13 @@ namespace RestauranteQR.Controllers
 
         public IActionResult Index()
         {
+           //Plato pla = new Plato();
+           //pla.Nombre = "toronja con tuco";
+           //pla.Ingredientes.Add(new Ingrediente() { Nombre = "a", Cantidad = 3 });
+           //pla.Ingredientes.Add(new Ingrediente() { Nombre = "b", Cantidad = 14 });
+           //pla.Ingredientes.Add(new Ingrediente() { Nombre = "c", Cantidad = 2 });
+           //_context.Platos.Add(pla);
+           //_context.SaveChanges();
             return View();
         }
 
