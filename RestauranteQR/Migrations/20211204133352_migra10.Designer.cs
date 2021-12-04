@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestauranteQR.BaseDatos;
 
 namespace RestauranteQR.Migrations
 {
     [DbContext(typeof(RestoDbContext))]
-    partial class RestoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211204133352_migra10")]
+    partial class migra10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,9 +127,6 @@ namespace RestauranteQR.Migrations
                     b.Property<int>("Precio")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("cantMax")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IngredienteId");
@@ -168,21 +167,21 @@ namespace RestauranteQR.Migrations
 
             modelBuilder.Entity("RestauranteQR.Models.IngredientePlato", b =>
                 {
-                    b.HasOne("RestauranteQR.Models.Ingrediente", "ElIngrediente")
+                    b.HasOne("RestauranteQR.Models.Ingrediente", "Ingrediente")
                         .WithMany("IngredientePlatos")
                         .HasForeignKey("IngredienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestauranteQR.Models.Plato", "ElPlato")
+                    b.HasOne("RestauranteQR.Models.Plato", "Plato")
                         .WithMany("IngredientePlatos")
                         .HasForeignKey("PlatoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ElIngrediente");
+                    b.Navigation("Ingrediente");
 
-                    b.Navigation("ElPlato");
+                    b.Navigation("Plato");
                 });
 
             modelBuilder.Entity("RestauranteQR.Models.Pedido", b =>

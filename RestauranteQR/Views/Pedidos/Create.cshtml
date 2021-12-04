@@ -58,7 +58,10 @@
 
                 var elemento = document.getElementById('ListaVMPedidoItem_' + indiceTocado + '__Cantidad');
                 var num = parseInt(elemento.value);
-                num++;
+                //if (num <= plato.cantMax){ 
+                    num++;
+                //}
+                
                 elemento.value = num;
 
             }

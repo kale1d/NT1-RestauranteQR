@@ -39,19 +39,19 @@ namespace RestauranteQR.BaseDatos
         //        .HasForeignKey(bc => bc.CategoryId);
         //}
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<IngredientePlato>()
-                .HasKey(bc => new { bc.IngredienteId, bc.PlatoId });
-            modelBuilder.Entity<IngredientePlato>()
-                .HasOne(bc => bc.Ingrediente)
-                .WithMany(b => b.IngredientePlatos)
-                .HasForeignKey(bc => bc.IngredienteId);
-            modelBuilder.Entity<IngredientePlato>()
-                .HasOne(bc => bc.Plato)
-                .WithMany(c => c.IngredientePlatos)
-                .HasForeignKey(bc => bc.PlatoId);
-        }
+       protected override void OnModelCreating(ModelBuilder modelBuilder)
+       {
+           modelBuilder.Entity<IngredientePlato>()
+               .HasKey(bc => new { bc.IngredienteId, bc.PlatoId });
+           modelBuilder.Entity<IngredientePlato>()
+               .HasOne(bc => bc.ElIngrediente)
+               .WithMany(b => b.IngredientePlatos)
+               .HasForeignKey(bc => bc.IngredienteId);
+           modelBuilder.Entity<IngredientePlato>()
+               .HasOne(bc => bc.ElPlato)
+               .WithMany(c => c.IngredientePlatos)
+               .HasForeignKey(bc => bc.PlatoId);
+       }
 
     }
 }

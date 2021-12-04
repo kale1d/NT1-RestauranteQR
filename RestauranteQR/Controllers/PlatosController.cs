@@ -46,19 +46,35 @@ namespace RestauranteQR.Controllers
             }
 
             var ingredientes = _context.Ingredientes;
+            
 
-
-            foreach (var ingrediente in ingredientes)
-            {
-                if (ingrediente.Id == plato.IngredienteId1)
+            for (int i = 0; i < ingredientes.ToList().Count; i++)// var ingrediente in ingredientes)
                 {
-                    ViewData["Ingrediente1"] = ingrediente.Nombre;
+                var ingreId = ingredientes.ToList()[i];
+                for(int j = 0; j < plato.IngredientePlatos.ToList().Count; j++)
+                {
+                    var ingBusId = plato.IngredientePlatos.ToList()[j];
+                
+                    if (ingreId.Id == ingBusId.Id)
+                    {
+                        ViewData["Ingrediente1"] = ingreId.Nombre;
+                    }
                 }
-                if (ingrediente.Id == plato.IngredienteId2) {
-                    ViewData["Ingrediente2"] = ingrediente.Nombre;
-                }
+
             }
-            return View(plato);
+
+                //ESTO DE ABAJO ESTABA ANTES
+                //foreach (var ingrediente in ingredientes)
+                //{
+                //    if (ingrediente.Id == plato.IngredienteId1)
+                //    {
+                //        ViewData["Ingrediente1"] = ingrediente.Nombre;
+                //    }
+                //    if (ingrediente.Id == plato.IngredienteId2) {
+                //        ViewData["Ingrediente2"] = ingrediente.Nombre;
+                //    }
+                //}
+                return View(plato);
         }
 
         // GET: Platos/Create
@@ -69,8 +85,8 @@ namespace RestauranteQR.Controllers
             
             Plato plato = new Plato();
             var ingredientes = _context.Ingredientes.ToList();
-            ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
-            ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
+            //ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
+            //ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
             ViewBag.Ingredientes = new SelectList(ingredientes, "Id", "Nombre");
             ViewBag.IngredientesList = ingredientes;
 
@@ -110,9 +126,11 @@ namespace RestauranteQR.Controllers
 
             //Plato plato = new Plato();
             var ingredientes = _context.Ingredientes.ToList();
-            ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
-            ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
-            ViewBag.Ingredientes = ingredientes;
+            //ViewData["IngredienteId1"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId1);
+            //ViewData["IngredienteId2"] = new SelectList(ingredientes, "Id", "Nombre", plato.IngredienteId2);
+            ViewBag.Ingredientes = new SelectList(ingredientes, "Id", "Nombre");
+            ViewBag.IngredientesList = ingredientes;
+            //ViewBag.Ingredientes = ingredientes;
 
 
             return View(plato);
@@ -146,7 +164,7 @@ namespace RestauranteQR.Controllers
                     }
                     else
                     {
-                        RNPlato.ModificarPlato(_context, plato.Id, plato.Nombre, plato.Precio, plato.IngredienteId1, plato.IngredienteId2);
+                        RNPlato.ModificarPlato(_context, plato.Id, plato.Nombre, plato.Precio, Request.Form["ingredientesPorPlato"], Request.Form["ingredientesPorPlatoId"], Request.Form["ingredientesPorPlatoNombre"]);
                         throw;
                     }
                 }

@@ -4,6 +4,8 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
     Console.WriteLine(ViewBag);
+    List<Ingrediente> ingresList = (List<Ingrediente>)ViewBag.IngredientesList;
+    SelectList ingres = (SelectList)ViewBag.Ingredientes;
 }
 
 <h1>Edit</h1>
@@ -23,17 +25,27 @@
                 <input asp-for="Precio" class="form-control" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
 
-                <label asp-for="IngredienteId1" class="control-label"></label>
-                <select asp-for="IngredienteId1" class="form-control" asp-items="@ViewBag.IngredienteId1"></select>
-                <span asp-validation-for="IngredienteId1" class="text-danger"></span>
-
+                @*<label asp-for="IngredienteId1" class="control-label"></label>
+        <select asp-for="IngredienteId1" class="form-control" asp-items="@ViewBag.IngredienteId1"></select>
+        <span asp-validation-for="IngredienteId1" class="text-danger"></span>*@
+                <ul>
+                    @foreach (var ing in ingresList)
+                    {
+                        <li>
+                            <label>@ing.Nombre</label>
+                            <input type="hidden" name="ingredientesPorPlatoId" id="ingredientesPorPlatoId" value="@ing.Id" />
+                            <input type="hidden" name="ingredientesPorPlatoNombre" id="ingredientesPorPlatoNombre" value="@ing.Nombre" />
+                            <input id="ingredientesPorPlato" type="checkbox" name="ingredientesPorPlato" value="@ing.Id" />
+                        </li>
+                    }
+                </ul>
                 <br />
                 <br />
 
-                <label asp-for="IngredienteId2" class="control-label"></label>
+                @*<label asp-for="IngredienteId2" class="control-label"></label>
 
-                <select asp-for="IngredienteId2" class="form-control" asp-items="@ViewBag.IngredienteId2"></select> 
-                <span asp-validation-for="IngredienteId2" class="text-danger"></span>
+        <select asp-for="IngredienteId2" class="form-control" asp-items="@ViewBag.IngredienteId2"></select>
+        <span asp-validation-for="IngredienteId2" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

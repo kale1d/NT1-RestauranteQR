@@ -1,6 +1,7 @@
 ﻿    using System;
     using System.Collections.Generic;
-    using RestauranteQR.BaseDatos;
+using System.Linq;
+using RestauranteQR.BaseDatos;
     using RestauranteQR.ViewModel;
 
 namespace RestauranteQR.Models
@@ -41,26 +42,50 @@ namespace RestauranteQR.Models
                 {
                     if (p.PlatoId == plato.Id)
                     {
-                        foreach (var ing in ingredientes)
+                        //agregado por mati
+                       foreach(var ing in plato.IngredientePlatos) //SIEMPRE DA NULL Y NO SE COMO ARREGLARLO!
                         {
-                            if (plato.IngredienteId1 == ing.Id || plato.IngredienteId2 == ing.Id)
+                            Ingrediente ingActual = _dbContext.Ingredientes.Single(x => x.Id == Convert.ToInt32(ing));
+
+                            if (pedido2.Id == p.PedidoId)
                             {
-                                if (pedido2.Id == p.PedidoId)
+                                var cant = ingActual.Cantidad -= p.Cantidad;
+                                if (cant >= 0)
                                 {
-                                    var cant = ing.Cantidad -= p.Cantidad;
-                                    if (cant >= 0)
-                                    {
-                                        _dbContext.Ingredientes.Update(ing);
-                                        p.NombrePlato = plato.Nombre;
-                                        p.PrecioPlato = plato.Precio;
-                                        _dbContext.PlatosPorPedido.Update(p);
-                                    } else
-                                    {
-                                        throw new Exception(plato.Nombre);
-                                    }
+                                    _dbContext.Ingredientes.Update(ingActual);
+                                    p.NombrePlato = plato.Nombre;
+                                    p.PrecioPlato = plato.Precio;
+                                    _dbContext.PlatosPorPedido.Update(p);
+                                }
+                                else
+                                {
+                                    throw new Exception(plato.Nombre);
                                 }
                             }
+
                         }
+
+                        //de aca seguia como estaba
+                        //foreach (var ing in ingredientes)
+                        //{
+                        //    if (plato.IngredienteId1 == ing.Id || plato.IngredienteId2 == ing.Id)
+                        //    {
+                        //        if (pedido2.Id == p.PedidoId)
+                        //        {
+                        //            var cant = ing.Cantidad -= p.Cantidad;
+                        //            if (cant >= 0)
+                        //            {
+                        //                _dbContext.Ingredientes.Update(ing);
+                        //                p.NombrePlato = plato.Nombre;
+                        //                p.PrecioPlato = plato.Precio;
+                        //                _dbContext.PlatosPorPedido.Update(p);
+                        //            } else
+                        //            {
+                        //                throw new Exception(plato.Nombre);
+                        //            }
+                        //        }
+                        //    }
+                        //}
                     }
                 }
             }
