@@ -25,9 +25,6 @@
                 <input asp-for="Precio" class="form-control" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
 
-                @*<label asp-for="IngredienteId1" class="control-label"></label>
-        <select asp-for="IngredienteId1" class="form-control" asp-items="@ViewBag.IngredienteId1"></select>
-        <span asp-validation-for="IngredienteId1" class="text-danger"></span>*@
                 <ul>
                     @foreach (var ing in ingresList)
                     {
@@ -41,11 +38,6 @@
                 </ul>
                 <br />
                 <br />
-
-                @*<label asp-for="IngredienteId2" class="control-label"></label>
-
-        <select asp-for="IngredienteId2" class="form-control" asp-items="@ViewBag.IngredienteId2"></select>
-        <span asp-validation-for="IngredienteId2" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
