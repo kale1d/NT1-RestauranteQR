@@ -17,24 +17,14 @@ namespace RestauranteQR.Models
 
         public int Precio { get; set; }
 
-        //[Display(Name = "Ingrediente 1")]
-        //public int? IngredienteId1 { get; set; }
-
-        //[Display(Name = "Ingrediente 2")]
-        //public int? IngredienteId2 { get; set; }
-
-        // public virtual ICollection<Ingrediente> Ingredientes { get; set; }
-
-        //ESTO ES LO QUE ESTABA ANTES, QUE LO QUIERO CAMBIAR POR UNA LISTA DE INGREDIENTES
-        //public ICollection<IngredientePlato> IngredientePlatos { get; set; }
-
+        
         public List<IngredientePlato> IngredientePlatos { get; set; }
 
         public int cantMax { get; set; }
 
         public Plato()
         {
-           // Ingredientes = new List<Ingrediente>();
+            IngredientePlatos = new List<IngredientePlato>();
         }
 
         internal static ReadOnlySpan<char> FindFirstValue(string nameIdentifier)

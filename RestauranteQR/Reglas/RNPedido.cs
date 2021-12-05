@@ -33,8 +33,8 @@ namespace RestauranteQR.Models
             var platosPedidos = _dbContext.PlatosPorPedido;
             var platos = _dbContext.Platos;
             var ingredientes = _dbContext.Ingredientes;
-
-
+            var ingrediDePlatos = _dbContext.IngredientePlato;
+           
             foreach (var p in platosPedidos)
             {
 
@@ -42,8 +42,16 @@ namespace RestauranteQR.Models
                 {
                     if (p.PlatoId == plato.Id)
                     {
-                        //agregado por mati
-                       foreach(var ing in plato.IngredientePlatos) //SIEMPRE DA NULL Y NO SE COMO ARREGLARLO!
+                        
+                        var ingreDelPla = new List<int>();
+                        foreach (var ingPla in ingrediDePlatos.ToList())
+                        {
+                            if(ingPla.PlatoId == plato.Id)
+                            {
+                                ingreDelPla.Add(ingPla.IngredienteId);
+                            }
+                        }
+                       foreach(var ing in ingreDelPla)
                         {
                             Ingrediente ingActual = _dbContext.Ingredientes.Single(x => x.Id == Convert.ToInt32(ing));
 
@@ -64,28 +72,6 @@ namespace RestauranteQR.Models
                             }
 
                         }
-
-                        //de aca seguia como estaba
-                        //foreach (var ing in ingredientes)
-                        //{
-                        //    if (plato.IngredienteId1 == ing.Id || plato.IngredienteId2 == ing.Id)
-                        //    {
-                        //        if (pedido2.Id == p.PedidoId)
-                        //        {
-                        //            var cant = ing.Cantidad -= p.Cantidad;
-                        //            if (cant >= 0)
-                        //            {
-                        //                _dbContext.Ingredientes.Update(ing);
-                        //                p.NombrePlato = plato.Nombre;
-                        //                p.PrecioPlato = plato.Precio;
-                        //                _dbContext.PlatosPorPedido.Update(p);
-                        //            } else
-                        //            {
-                        //                throw new Exception(plato.Nombre);
-                        //            }
-                        //        }
-                        //    }
-                        //}
                     }
                 }
             }

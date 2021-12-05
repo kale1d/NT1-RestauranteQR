@@ -24,8 +24,7 @@ namespace RestauranteQR.Models
             
             foreach(var item in stringValues)
             {
-                //EN EL PTRO LADO
-                //Ingrediente ingActual = dbContext.Ingredientes.Single(x => x.Id == Convert.ToInt32(item));
+              
                 var ingId = Convert.ToInt32(item);
                 var ingredi = dbContext.Ingredientes.ToList(); 
                 var encontrado = false;
@@ -37,7 +36,7 @@ namespace RestauranteQR.Models
                         var ing = new IngredientePlato() { PlatoId = nuevoPlato.Id, IngredienteId = ingId, ElIngrediente = ingredi[i], ElPlato = nuevoPlato };
                         dbContext.IngredientePlato.Add(ing);
 
-                        nuevoPlato.IngredientePlatos.Add(ing); //new IngredientePlato() { Ingrediente = ingId }
+                        nuevoPlato.IngredientePlatos.Add(ing); 
                         encontrado = true;
                         dbContext.SaveChanges();
                     }
@@ -46,7 +45,7 @@ namespace RestauranteQR.Models
                     }
                     
                 }
-                //var plat = dbContext.Platos.ToList()[];
+          
                 
             }
             
@@ -61,8 +60,7 @@ namespace RestauranteQR.Models
             nuevoPlato.Id = id;
             nuevoPlato.Nombre = nombre;
             nuevoPlato.Precio = precio;
-            //nuevoPlato.IngredienteId1 = ingrediente1;
-            //nuevoPlato.IngredienteId2 = ingrediente2;
+           
 
 
             dbContext.Platos.Add(nuevoPlato);
@@ -71,9 +69,30 @@ namespace RestauranteQR.Models
             dbContext.SaveChanges();
             foreach (var item in stringValues)
             {
-                //EN EL PTRO LADO
-                //Ingrediente ingActual = dbContext.Ingredientes.Single(x => x.Id == Convert.ToInt32(item));
-                dbContext.IngredientePlato.Add(new IngredientePlato() { PlatoId = nuevoPlato.Id, IngredienteId = Convert.ToInt32(item) });
+
+                var ingId = Convert.ToInt32(item);
+                var ingredi = dbContext.Ingredientes.ToList();
+                var encontrado = false;
+                int i = 0;
+                while (!encontrado && i < ingredi.Count) //DE ESTA FORMA ME FIJO QUE SI EL INGREDIENTE QUE VINO POR PARAME ESTA EN LA LISTA DE INGREDIENTES DE LA BASE, LA AGREGO AL NUEVO PLATO COMO INGREDIENTEPLATOS
+                {
+                    if (ingredi[i].Id == ingId)
+                    {
+                        var ing = new IngredientePlato() { PlatoId = nuevoPlato.Id, IngredienteId = ingId, ElIngrediente = ingredi[i], ElPlato = nuevoPlato };
+                        dbContext.IngredientePlato.Add(ing);
+
+                        nuevoPlato.IngredientePlatos.Add(ing);
+                        encontrado = true;
+                        dbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        i++;
+                    }
+
+                }
+
+
             }
             dbContext.Database.CommitTransaction();
 
