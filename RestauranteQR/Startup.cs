@@ -37,8 +37,8 @@ namespace RestauranteQR
          );
         services.AddControllersWithViews();
         //services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"Data Source=/Users/fidustap/ORT/2Cuat/NT1/RestauranteQR/RestauranteQR/BaseDatos/IngredienteTabla.db")); den
-        //services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\matih\OneDrive\Escritorio\ORT\PROGRAMACION EN NUEVAS TECNOLOGIAS 1\NT1-RestauranteQR\RestauranteQR\BaseDatos\IngredienteTabla.db")); //mati
-        services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\malu2\source\repos\NT1-RestauranteQR\RestauranteQR\BaseDatos\IngredienteTabla.db")); //malu
+        services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\matih\OneDrive\Escritorio\ORT\PROGRAMACION EN NUEVAS TECNOLOGIAS 1\NT1-RestauranteQR\RestauranteQR\BaseDatos\IngredienteTabla.db")); //mati
+        //services.AddDbContext<RestoDbContext>(options => options.UseSqlite(@"filename=C:\Users\malu2\source\repos\NT1-RestauranteQR\RestauranteQR\BaseDatos\IngredienteTabla.db")); //malu
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,12 +29,14 @@
             Ingredientes
         </dt>
         <dd class="col-sm-10">
-            <dl>
+            
+            <ol>
                 @foreach (var item in ViewData["ingredientes"] as IList<String>)
                 {
-                <dd>@item</dd> 
+                <li>@item</li> 
                     }
-            </dl>
+        </ol>
+           
         </dd>
     </dl>
 </div>
