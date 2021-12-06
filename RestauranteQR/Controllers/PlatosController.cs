@@ -46,23 +46,22 @@ namespace RestauranteQR.Controllers
             }
 
             var ingredientes = _context.Ingredientes;
-            
+            var ingredientePlatos = _context.IngredientePlato;
+            var listaIngredientes = new List<String>();
 
-            for (int i = 0; i < ingredientes.ToList().Count; i++)
-                {
-                var ingreId = ingredientes.ToList()[i];
-                for(int j = 0; j < plato.IngredientePlatos.ToList().Count; j++)
-                {
-                    var ingBusId = plato.IngredientePlatos.ToList()[j];
-                
-                    if (ingreId.Id == ingBusId.Id)
+            for (int i = 0; i < ingredientePlatos.ToList().Count; i++)
+            {
+                if (ingredientePlatos.ToList()[i].PlatoId == plato.Id) {
+                    for (int j = 0; j < ingredientes.ToList().Count; j++)
                     {
-                        ViewData["Ingrediente1"] = ingreId.Nombre;
+                        if (ingredientes.ToList()[j].Id == ingredientePlatos.ToList()[i].IngredienteId) {
+                            listaIngredientes.Add(ingredientes.ToList()[j].Nombre);
+                        }
                     }
                 }
 
             }
-
+            ViewData["ingredientes"]= listaIngredientes;
           return View(plato);
         }
 
