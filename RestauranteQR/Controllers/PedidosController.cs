@@ -80,9 +80,7 @@ namespace RestauranteQR.Controllers
 
         public async Task<IActionResult> ErrorPedido(string nombre)
         {
-            //var platos = pedido.ListaVMPedidoItem;
-            //var elPlatoSinStock = platos.buscarElQueNoTieneStock ; //ESTO ESTA MAL
-            ////aca habria que conseguir el nombre del plato que no tiene stock del pedido, y pasarselo a la vista
+            
             ViewData["nomPla"] = nombre;
             return View();
         }

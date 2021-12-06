@@ -36,9 +36,9 @@ namespace RestauranteQR.Controllers
         [HttpPost]
         public IActionResult Login(string Email, string Password, Rol Rol)
         {
-            Email = "matihabibo@gmail.com";
-            Password = "1";
-            Rol = Rol.Administrador;
+            //Email = "matihabibo@gmail.com";
+            //Password = "1";
+            //Rol = Rol.Administrador;
             string returnUrl = TempData[_Return_Url] as string;
 
             if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
